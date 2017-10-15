@@ -1,3 +1,4 @@
+import datetime
 from time import sleep
 
 from selenium import webdriver
@@ -22,15 +23,21 @@ def establish():
     try:
         WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, "voteComplete")))
         success +=1
-        print("success/fail", success, fail)
+
         sleep(1)
-        driver.quit()
+        # driver.quit()
     except:
         fail +=1
-        print("success/fail", success, fail)
         sleep(1)
-        driver.quit()
+        # driver.quit()
 
+    print("".join([str(datetime.datetime.now().time()),
+                   " success/fail: ",
+                   str(success),
+                   " / ",
+                   str(fail)]))
+
+    driver.close()
     establish()
 
 establish()
