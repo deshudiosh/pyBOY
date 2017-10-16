@@ -27,6 +27,7 @@ def loop(project:dict):
 
     driver.close()
 
+    #TODO: count successes on file copy (so write acces wont fail in logs_counter)
     counted_successes = count_check.get_success_num(project["url"])
     print(counted_successes, "/", project["num_iter"])
 
