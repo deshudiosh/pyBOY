@@ -9,6 +9,8 @@ import counter
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--incognito")
+chrome_options.add_argument("--disable-gpu")
+chrome_options.add_argument("--log-level=3")
 chrome_options.add_argument("--headless")
 
 url = "https://boyawards.secure-platform.com/a/gallery/rounds/12/vote/10991"
