@@ -15,13 +15,16 @@ def change_value(url, success=0, fail=0):
             values = [values[0] + success, values[1] + fail]
             newline = url + " > " + str(values[0]) + " / " + str(values[1]) + "\n"
             newlines.append(newline)
+            print(newline)
             addNewLine = False
         else:
             newlines.append(line)
+            print(line)
 
     if addNewLine:
         line = url + " > " + str(success) + " / " + str(fail) + "\n"
         newlines.append(line)
+        print(line)
 
     log = open("log.txt", "w")
     for line in newlines:
