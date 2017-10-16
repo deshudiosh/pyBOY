@@ -13,7 +13,7 @@ chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument("--log-level=3")
 chrome_options.add_argument("--headless")
 
-url = "https://boyawards.secure-platform.com/a/gallery/rounds/12/vote/10991"
+url = "https://boyawards.secure-platform.com/a/gallery/rounds/12/vote/9107"
 
 
 def loop():
