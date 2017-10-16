@@ -13,6 +13,7 @@ chrome_options.add_argument("--headless")
 
 url = "https://boyawards.secure-platform.com/a/gallery/rounds/12/vote/10991"
 
+
 def loop():
     driver = webdriver.Chrome(executable_path="./chromedriver.exe", chrome_options=chrome_options)
     driver.get(url)
