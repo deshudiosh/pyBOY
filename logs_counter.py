@@ -1,4 +1,6 @@
+import datetime
 import os
+from time import sleep
 
 
 def write_to_logtxt(url, success=0, fail=0):
@@ -37,7 +39,9 @@ def count_logs_and_move_to_used():
     logs_dir = "./logs/"
     logs_used = "./logs_used/"
 
-    for filename in os.listdir(logs_dir):
+    files = os.listdir(logs_dir)
+
+    for filename in files:
         file = open(logs_dir + filename)
         url = file.readline().strip("\n")
         success = file.readline().strip("\n") == "True"
@@ -51,5 +55,12 @@ def count_logs_and_move_to_used():
         new_path = logs_used + os.path.basename(filename)
         os.rename(logs_dir + filename, new_path)
 
-count_logs_and_move_to_used()
+    return len(files)
+
+
+while(True):
+    count = count_logs_and_move_to_used()
+    t = datetime.datetime.now()
+    print(":".join([str(t.hour), str(t.minute), str(t.second)]), count, "logs counted!")
+    sleep(10)
 

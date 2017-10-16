@@ -12,7 +12,7 @@ def make_log_file(project:dict, success):
     file.close()
 
     t = datetime.datetime.now()
-    print(":".join([str(t.hour), str(t.minute), str(t.second)]), project["name"],",", success, ",", project["cur_iter"], "/", project["num_iter"])
+    print(" > ".join([":".join([str(t.hour), str(t.minute), str(t.second)]), project["name"],project["category"], ("success" if success else "fail")]))
 
 
 def success(project:dict):
