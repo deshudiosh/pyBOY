@@ -49,5 +49,3 @@ def success(url):
 
 def fail(url):
     make_log_file(url, success=False)
-
-fail("https://boyawards.secure-platform.com/a/gallery/rounds/12/vote/9101117")
