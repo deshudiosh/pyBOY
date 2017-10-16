@@ -1,20 +1,25 @@
+import datetime
 import os
 import tempfile
 
 
-def make_log_file(url, success):
+def make_log_file(project:dict, success):
     dir = "./logs"
     if not os.path.exists(dir):
         os.makedirs(dir)
     file = tempfile.NamedTemporaryFile(dir=dir, delete=False, mode="w")
-    file.write(url + "\n" + str(success))
+    file.write("\n".join([project["url"], str(success), project["name"], project["category"]]))
     file.close()
 
+    t = datetime.datetime.now()
+    print(":".join([str(t.hour), str(t.minute), str(t.second)]), project["name"],",", success, ",", project["cur_iter"], "/", project["num_iter"])
 
-def success(url):
-    make_log_file(url, success=True)
+
+def success(project:dict):
+    make_log_file(project, success=True)
 
 
-def fail(url):
-    make_log_file(url, success=False)
+def fail(project:dict):
+    make_log_file(project, success=False)
+
 

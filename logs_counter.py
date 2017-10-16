@@ -40,7 +40,7 @@ def count_logs_and_move_to_used():
     for filename in os.listdir(logs_dir):
         file = open(logs_dir + filename)
         url = file.readline().strip("\n")
-        success = file.readline() == "True"
+        success = file.readline().strip("\n") == "True"
         file.close()
 
         if success:
