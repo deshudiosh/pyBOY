@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
-import counter
+import logger
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--incognito")
@@ -23,10 +23,10 @@ def loop():
     try:
         driver.find_element_by_class_name("confirmVote").click()
         WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, "voteComplete")))
-        counter.success(url)
+        logger.success(url)
         sleep(1)
     except:
-        counter.fail(url)
+        logger.fail(url)
         sleep(1)
 
     driver.close()
