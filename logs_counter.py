@@ -1,51 +1,55 @@
 import os
 
-def change_value(url, success=0, fail=0):
+
+def write_to_logtxt(url, success=0, fail=0):
     log = open("log.txt", "r")
     lines = log.readlines()
     log.close()
 
-    addNewLine = True
+    add_new_line = True
 
     newlines = []
 
     for line in lines:
+        line = line.strip("\n")
         found = line[:len(url)] == url
 
         if found:
             values = [int(val) for val in line.split(">")[1].split("/")]
             values = [values[0] + success, values[1] + fail]
-            newline = url + " > " + str(values[0]) + " / " + str(values[1]) + "\n"
+            newline = url + " > " + str(values[0]) + " / " + str(values[1])
             newlines.append(newline)
-            print(newline)
-            addNewLine = False
+            add_new_line = False
         else:
             newlines.append(line)
-            print(line)
 
-    if addNewLine:
-        line = url + " > " + str(success) + " / " + str(fail) + "\n"
-        newlines.append(line)
-        print(line)
+    if add_new_line:
+        newline = url + " > " + str(success) + " / " + str(fail)
+        newlines.append(newline)
 
     log = open("log.txt", "w")
     for line in newlines:
-        log.write(line)
+        log.write(line + "\n")
     log.close()
 
-def count():
-    dir = "./logs"
 
-    for filename in os.listdir(dir):
-        file = open(dir + "/" + filename)
-        url = file.readline()
-        url = url.strip('\n')
-        success = file.readline()=="True"
+def count_logs_and_move_to_used():
+    logs_dir = "./logs/"
+    logs_used = "./logs_used/"
+
+    for filename in os.listdir(logs_dir):
+        file = open(logs_dir + filename)
+        url = file.readline().strip("\n")
+        success = file.readline() == "True"
+        file.close()
 
         if success:
-            change_value(url, success=1)
+            write_to_logtxt(url, success=1)
         else:
-            change_value(url, fail=1)
+            write_to_logtxt(url, fail=1)
 
-count()
+        new_path = logs_used + os.path.basename(filename)
+        os.rename(logs_dir + filename, new_path)
+
+count_logs_and_move_to_used()
 
